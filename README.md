@@ -58,4 +58,3 @@ List of available applications (use one of host name instead of ApplicationUrl):
 - marsrutai.lt - Maršrutai
 - trafi.lv - TRAFI Latvija
 - trafi.ee - TRAFI Eesti
-
