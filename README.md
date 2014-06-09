@@ -41,7 +41,7 @@ Currently supported applications:
 ### App Links
 
 Trafi applications supports [App Links](http://applinks.org) specification. You can use any framework that supports [App Links](http://applinks.org) specification, or implement it yourself.
-You should formt url:
+You should format url:
 
 	http://<ApplicationUrl>/go?fromName=<LocationName>&fromCoord=<lat>,<lng>&toName=<LocationName>&toCoord=<lat>,<lng>
 
