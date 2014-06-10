@@ -108,7 +108,8 @@ typedef void (^TRAppLinksResolverFailureCallback)(NSError *error);
     
     _successCallback = successCallback;
     _failureCallback = failureCallback;
-    
+
+    __weak __typeof(self)weakSelf = self;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"al" forHTTPHeaderField:@"Prefer-Html-Meta-Tags"];
     [NSURLConnection sendAsynchronousRequest:request
@@ -117,15 +118,15 @@ typedef void (^TRAppLinksResolverFailureCallback)(NSError *error);
                                                NSData *data,
                                                NSError *connectionError) {
                                if (connectionError) {
-                                   if (self.failureCallback) {
-                                       self.failureCallback(connectionError);
+                                   if (weakSelf.failureCallback) {
+                                       weakSelf.failureCallback(connectionError);
                                    }
                                    return;
                                }
                                
                                if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                                    UIWebView *webView = [UIWebView new];
-                                   webView.delegate = self;
+                                   webView.delegate = weakSelf;
                                    webView.hidden = YES;
                                    
                                    UIWindow *window = [UIApplication sharedApplication].delegate.window;
@@ -326,11 +327,11 @@ completionCallback:(TRLauncherCallback)callback {
                                encodeUrlString(fromLocation.name)]];
         }
         
-        NSString *string = [NSString stringWithFormat:kTRAppLinksFromCoordinateFormat,
-                            fromLocation.coordinate.latitude,
-                            fromLocation.coordinate.longitude];
+        NSString *coordinatesString = [NSString stringWithFormat:kTRAppLinksFromCoordinateFormat,
+                                       fromLocation.coordinate.latitude,
+                                       fromLocation.coordinate.longitude];
 
-        [params addObject:string];
+        [params addObject:coordinatesString];
     }
     
     if (toLocation) {
@@ -339,11 +340,11 @@ completionCallback:(TRLauncherCallback)callback {
                                encodeUrlString(toLocation.name)]];
         }
         
-        NSString *string = [NSString stringWithFormat:kTRAppLinksToCoordinateFormat,
-                            toLocation.coordinate.latitude,
-                            toLocation.coordinate.longitude];
+        NSString *coordinatesString = [NSString stringWithFormat:kTRAppLinksToCoordinateFormat,
+                                       toLocation.coordinate.latitude,
+                                       toLocation.coordinate.longitude];
         
-        [params addObject:string];
+        [params addObject:coordinatesString];
     }
     else {
         [[NSException exceptionWithName:@"To location not provided"
@@ -373,9 +374,9 @@ completionCallback:(TRLauncherCallback)callback {
             break;
     }
     
-    NSString *url = [NSString stringWithFormat:@"http://%@/go?%@", appHostName, [params componentsJoinedByString:@"&"]];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/go?%@", appHostName, [params componentsJoinedByString:@"&"]];
     
-    return [NSURL URLWithString:url];
+    return [NSURL URLWithString:urlString];
 }
 
 @end
