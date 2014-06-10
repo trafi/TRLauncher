@@ -1,6 +1,7 @@
 TRLauncher
 ==========
 
+TRLauncher is a class, that simplifies launch of Trafi application.
 There are two ways to launch trafi application. Using TRLauncher, or using other libraries, that supports [App Links](http://applinks.org).
 
 ### TRLauncher
