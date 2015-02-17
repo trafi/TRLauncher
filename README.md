@@ -8,7 +8,7 @@ There are two ways to launch trafi application. Using TRLauncher, or using other
 
 We suggest you to use TRLauncher. Example below displays hot to launch TRAFI Türkiye application with directions from current location to Taksim squere.
 
-    TRLocation *toLocation = [TRLocation locationWithName:@"Taksim Squere"
+    TRLocation *toLocation = [TRLocation locationWithName:@"Taksim Square"
                                                coordinate:CLLocationCoordinate2DMake(41.036855, 28.986639)];
     
     [TRLauncher routeInApp:TRAppTrafiTurkey        //application you want to launch
@@ -29,15 +29,6 @@ In example above, current location is used as journey start location. If you wan
 If you do not know name of location use:
 
     + (TRLocation*)locationWithCoordinate:(CLLocationCoordinate2D)coordinate
-
-
-Currently supported applications:
-
-- TRAppTrafiTurkey - TRAFI Türkiye
-- TRAppTrafiBrasil - TRAFI Brasil
-- TRAppTrafiLithuania - Maršrutai
-- TRAppTrafiLatvia - TRAFI Latvija
-- TRAppTrafiEstonia - TRAFI Eesti
         
 ### App Links
 
